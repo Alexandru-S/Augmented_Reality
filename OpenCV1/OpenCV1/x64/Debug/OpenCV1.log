@@ -1,4 +1,5 @@
-﻿  main.cpp
-c:\users\owner\desktop\opencv1\opencv1\main.cpp(79): warning C4715: 'Img': not all control paths return a value
+﻿  Img.cpp
+c:\users\owner\desktop\opencv1\opencv1\img.cpp(46): warning C4715: 'error': not all control paths return a value
+c:\users\owner\desktop\opencv1\opencv1\img.cpp(38): warning C4715: 'Img': not all control paths return a value
   OpenCV1.vcxproj -> C:\Users\owner\Desktop\OpenCV1\x64\Debug\OpenCV1.exe
   OpenCV1.vcxproj -> C:\Users\owner\Desktop\OpenCV1\x64\Debug\OpenCV1.pdb (Full PDB)
