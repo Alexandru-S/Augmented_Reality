@@ -109,7 +109,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\opencv3\install\x64\vc14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_core320d.lib;opencv_imgproc320d.lib;opencv_imgcodecs320d.lib;opencv_highgui320d.lib;opencv_xfeatures2d320d.lib;opencv_features2d320d.lib;opencv_flann320d.lib;opencv_calib3d320d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_core320d.lib;opencv_imgproc320d.lib;opencv_imgcodecs320d.lib;opencv_highgui320d.lib;opencv_xfeatures2d320d.lib;opencv_features2d320d.lib;opencv_text320d.lib;opencv_videoio320d.lib;opencv_video320d.lib;opencv_flann320d.lib;opencv_calib3d320d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
