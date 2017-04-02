@@ -1,5 +1,5 @@
 #pragma once
-#ifndef IMG_H    // To make sure you don't declare the function more than once by including the header multiple times.
+#ifndef IMG_H
 #define IMG_H
 
 #include <opencv2/core/core.hpp>
@@ -13,9 +13,9 @@
 #include "opencv2/text.hpp"
 #include "opencv2/calib3d/calib3d.hpp"
 
-
 #include <iomanip>
 #include <iostream>
+
 #include <string>
 #include <stdio.h>
 #include <iostream>

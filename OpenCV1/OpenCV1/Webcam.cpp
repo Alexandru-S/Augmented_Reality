@@ -1,6 +1,6 @@
 #include "Webcam.h"
 
-//http://answers.opencv.org/question/1/how-can-i-get-frames-from-my-webcam/
+//http://docs.opencv.org/3.0-beta/modules/videoio/doc/reading_and_writing_video.html
 //to open webcam
 int Webcam()
 {
@@ -14,9 +14,9 @@ int Webcam()
 	{
 		Mat frame;
 		webcam >> frame;
-		if (frame.empty()) break; // end of video stream
+		if (frame.empty()) break; 
 		imshow("webcam", frame);
-		if (waitKey(10) == 27) break; // stop capturing by pressing ESC 
+		if (waitKey(10) == 27) break; 
 	}
 	return 0;
 }

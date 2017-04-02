@@ -151,10 +151,12 @@
   <ItemGroup>
     <ClCompile Include="Img.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Video.cpp" />
     <ClCompile Include="Webcam.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Img.h" />
+    <ClInclude Include="Video.h" />
     <ClInclude Include="Webcam.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
