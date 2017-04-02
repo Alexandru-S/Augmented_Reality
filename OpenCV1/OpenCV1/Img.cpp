@@ -103,6 +103,7 @@ int Img()
 	Window(grayimage2 , "grey image2");
 	Window(img_keypoints_1, "key img 1");
 	waitKey(0);
+
 }
 
 int error(Mat err) {

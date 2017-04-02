@@ -1,3 +1,7 @@
 ﻿  main.cpp
+  Img.cpp
+  Generating Code...
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\img.cpp(115): warning C4715: 'error': not all control paths return a value
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\img.cpp(107): warning C4715: 'Img': not all control paths return a value
   OpenCV1.vcxproj -> C:\Users\owner\Desktop\Augmented_Reality\OpenCV1\x64\Debug\OpenCV1.exe
   OpenCV1.vcxproj -> C:\Users\owner\Desktop\Augmented_Reality\OpenCV1\x64\Debug\OpenCV1.pdb (Full PDB)

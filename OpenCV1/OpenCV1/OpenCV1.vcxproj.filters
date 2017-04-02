@@ -21,9 +21,15 @@
     <ClCompile Include="Img.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Webcam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Img.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Webcam.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
