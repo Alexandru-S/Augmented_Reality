@@ -9,10 +9,12 @@
 #include "opencv2/xfeatures2d.hpp"
 #include "opencv2/imgproc.hpp"
 #include "opencv2/imgcodecs.hpp"
+#include "opencv2/highgui/highgui.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/flann.hpp"
 #include "opencv2/text.hpp"
 #include "opencv2/stitching.hpp"
+#include "opencv2/video/background_segm.hpp"
 
 //#include <opencv2/sfm.hpp>
 //#include <opencv2/viz.hpp>
@@ -24,9 +26,10 @@
 
 #include <string>
 #include <stdio.h>
-#include <iostream>
 
-#include <iostream>
+#include "opencv2/videoio.hpp"
+#include <opencv2/highgui.hpp>
+#include <opencv2/video.hpp>
 #include <algorithm>
 
 #include <sstream>

@@ -7,9 +7,14 @@ void advStitch();
 Stitcher::Mode mode = Stitcher::PANORAMA;
 vector<Mat> imgs;
 
+Mat fgMaskMOG233; 
+Ptr<BackgroundSubtractor> pMOG222;
+
+
 //https://ramsrigoutham.com/2012/11/22/panorama-image-stitching-in-opencv/
 int Img()
 {
+	
 
 	Mat image1;
 	Mat image2;
@@ -26,6 +31,8 @@ int Img()
 
 		image1 = imread("pic1.jpg", CV_LOAD_IMAGE_COLOR);   // Read the file
 		image2 = imread("pic2.jpg", CV_LOAD_IMAGE_COLOR);   // Read the file
+
+		//pMOG222->apply(image1, fgMaskMOG233);
 		if (!image1.data || !image2.data)                              // Check for invalid input
 		{
 			cout << "Could not open or find the image" << std::endl;
