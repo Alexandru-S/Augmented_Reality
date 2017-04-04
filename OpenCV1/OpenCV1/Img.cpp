@@ -1,6 +1,7 @@
 #include "Img.h"
 
 void Window(Mat, String);
+void advStitch();
 
 
 Stitcher::Mode mode = Stitcher::PANORAMA;
@@ -117,9 +118,45 @@ int Img()
 	else if (inp2 = 2)
 	{
 
+
+	
+
 		printf("advanced stitching");
-		return -1;
+		advStitch();
+		return 0;
 	}
+
+}
+
+void advStitch()
+{
+
+	vector< Mat > vImg;
+	Mat rImg;
+
+	vImg.push_back(imread("img11.jpg"));
+	vImg.push_back(imread("img12.jpg"));
+	vImg.push_back(imread("img13.jpg"));
+	vImg.push_back(imread("img14.jpg"));
+
+
+	Stitcher stitcher = Stitcher::createDefault();
+
+
+	unsigned long AAtime = 0, BBtime = 0;
+	AAtime = getTickCount(); 
+
+	Stitcher::Status status = stitcher.stitch(vImg, rImg);
+
+	BBtime = getTickCount(); //check processing time 
+	printf("%.2lf sec \n", (BBtime - AAtime) / getTickFrequency()); //check processing time
+
+	if (Stitcher::OK == status)
+		imshow("Stitching Result", rImg);
+	else
+		printf("Stitching fail.");
+
+	waitKey(0);
 
 }
 

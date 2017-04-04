@@ -14,32 +14,19 @@ using namespace std;
 
 int inp;
 
-void printSeparator();
+int printSeparator( int);
 
-#ifdef _DEBUG  
-#pragma comment(lib, "opencv_core320d.lib")   
-#pragma comment(lib, "opencv_imgproc320d.lib")   //MAT processing  
-#pragma comment(lib, "opencv_highgui320d.lib")  
-#pragma comment(lib, "opencv_stitching320d.lib")
-
-#else  
-#pragma comment(lib, "opencv_core320.lib")  
-#pragma comment(lib, "opencv_imgproc320.lib")  
-#pragma comment(lib, "opencv_highgui320.lib")  
-#pragma comment(lib, "opencv_stitching320.lib")
-#endif  
+int inp1;
 
 int main()
 {
-	vector< Mat > vImg;
-	Mat rImg;
 
-	int inp1;
-	printSeparator();
+	printSeparator(2);
 	printf("--- AUGMENTED REALITY REPORT ---\n");
-	printSeparator();
+	printSeparator(2);
 	printf("please select from the following:\n 1 for video \n 2 for img \n 3 for webcam \n");
 	cin >> inp1;
+	printSeparator(1);
 
 
 	if(inp1 == 1)
@@ -60,7 +47,12 @@ int main()
 
 
 
-void printSeparator()
+int printSeparator( int lines)
 {
-	printf("-------------------------------------------\n");
+	for (int i = 0; i < lines; i++)
+	{
+		printf("-------------------------------------------\n");
+	}
+	
+	return 0;
 }

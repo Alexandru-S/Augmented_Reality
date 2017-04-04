@@ -33,6 +33,21 @@
 #include <ctime>
 #include <cstdio>
 
+
+#ifdef _DEBUG  
+#pragma comment(lib, "opencv_core320d.lib")   
+#pragma comment(lib, "opencv_imgproc320d.lib")   //MAT processing  
+#pragma comment(lib, "opencv_highgui320d.lib")  
+#pragma comment(lib, "opencv_stitching320d.lib")
+
+#else  
+#pragma comment(lib, "opencv_core320.lib")  
+#pragma comment(lib, "opencv_imgproc320.lib")  
+#pragma comment(lib, "opencv_highgui320.lib")  
+#pragma comment(lib, "opencv_stitching320.lib")
+#endif  
+
+
 using namespace cv;
 using namespace cv::xfeatures2d;
 using namespace std;
