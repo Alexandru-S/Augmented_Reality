@@ -2,21 +2,43 @@
 
 //http://docs.opencv.org/3.0-beta/modules/videoio/doc/reading_and_writing_video.html
 //to open webcam
+
+int inpWebCam;
+
 int Webcam()
 {
-	VideoCapture webcam;
-	if (!webcam.open(0))
+
+	printf("please specify which stitching you are using:\n 1: normal webcam \n 2: webcam stitching \n 3:  web cam background subtraction \n");
+	cin >> inpWebCam;
+
+	if (inpWebCam == 1)
 	{
-		return 0;
+		VideoCapture webcam;
+		if (!webcam.open(0))
+		{
+			return 0;
+		}
+		else {
+			for (;;)
+			{
+				Mat frame;
+				webcam >> frame;
+				if (frame.empty()) break;
+
+
+
+				imshow("webcam", frame);
+				if (waitKey(10) == 27) break;
+			}
+		}
 	}
 
-	for (;;)
+	if (inpWebCam == 2)
 	{
-		Mat frame;
-		webcam >> frame;
-		if (frame.empty()) break; 
-		imshow("webcam", frame);
-		if (waitKey(10) == 27) break; 
+		cout << "Input Camera device number(ex: 0 enter) \n";
+
+
 	}
+
 	return 0;
 }

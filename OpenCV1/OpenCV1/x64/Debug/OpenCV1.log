@@ -1,4 +1,11 @@
-﻿  Video.cpp
-c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(47): warning C4715: 'Video': not all control paths return a value
+﻿  Img.cpp
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\img.cpp(179): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\img.cpp(180): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\img.cpp(181): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\img.cpp(234): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\img.cpp(258): warning C4244: '=': conversion from 'int64' to 'unsigned long', possible loss of data
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\img.cpp(262): warning C4244: '=': conversion from 'int64' to 'unsigned long', possible loss of data
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\img.cpp(280): warning C4715: 'error': not all control paths return a value
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\img.cpp(222): warning C4715: 'Img': not all control paths return a value
   OpenCV1.vcxproj -> C:\Users\owner\Desktop\Augmented_Reality\OpenCV1\x64\Debug\OpenCV1.exe
   OpenCV1.vcxproj -> C:\Users\owner\Desktop\Augmented_Reality\OpenCV1\x64\Debug\OpenCV1.pdb (Full PDB)

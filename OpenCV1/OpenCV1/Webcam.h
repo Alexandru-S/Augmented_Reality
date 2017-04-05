@@ -10,6 +10,8 @@
 #include "opencv2/highgui.hpp"
 #include "opencv2/flann.hpp"
 #include "opencv2/calib3d/calib3d.hpp"
+#include "opencv2/opencv.hpp"
+//#include "pcl/visualization/cloud_viewer.h"
 
 
 #include <iomanip>

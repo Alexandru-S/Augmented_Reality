@@ -11,6 +11,15 @@ Mat matMogMask;
 Ptr<BackgroundSubtractor> ptrMog;
 
 
+
+struct userdata {
+	Mat im;
+	vector<Point2f> points;
+};
+
+void mouseHandler(int event, int x, int y, int flags, void* data_ptr);
+
+
 //https://ramsrigoutham.com/2012/11/22/panorama-image-stitching-in-opencv/
 int Img()
 {
@@ -26,13 +35,20 @@ int Img()
 
 	ptrMog = createBackgroundSubtractorMOG2();
 
-	printf("please specify which stitching you are using:\n 1: normal stitching \n 2: advanced stitching \n 3: background subtraction \n");
+	printf("please specify which stitching you are using:\n 1: normal stitching \n 2: advanced stitching \n 3: background subtraction \n 4: background augmentation \n");
 	cin >> inp2;
-	cout << inp2 << endl;
 
-	image1 = imread("pic1.jpg", CV_LOAD_IMAGE_COLOR);   // Read the file
-	image2 = imread("pic2.jpg", CV_LOAD_IMAGE_COLOR);   // Read the file
+
+	image1 = imread("pic1.jpg", CV_LOAD_IMAGE_COLOR);   
+	image2 = imread("pic2.jpg", CV_LOAD_IMAGE_COLOR);   
 	image12 = imread("img12.jpg", CV_LOAD_IMAGE_COLOR);
+
+	Mat im_first = imread("first-image.jpg");
+	Mat im_scene = imread("times-square.jpg");
+	Size size = im_first.size();
+
+
+
 
 	if (inp2 == 1) {
 
@@ -133,7 +149,7 @@ int Img()
 		advStitch();
 		return 0;
 	}
-	else if (inp2 == 3)
+	if (inp2 == 3)
 	{
 
 		if (!image1.data || !image2.data)                              // Check for invalid input
@@ -156,8 +172,68 @@ int Img()
 		imshow("image 12", image12);
 		waitKey(0);
 	}
+	else if (inp2 == 4)
+	{
+		vector<Point2f> pts_src;
+		pts_src.push_back(Point2f(0, 0));
+		pts_src.push_back(Point2f(size.width - 1, 0));
+		pts_src.push_back(Point2f(size.width - 1, size.height - 1));
+		pts_src.push_back(Point2f(0, size.height - 1));
+
+		Mat im_temp = im_scene.clone();
+		userdata data;
+		data.im = im_temp;
+		imshow("Image", im_temp);
 
 
+		cout << "Click on four corners of a billboard and then press ENTER" << endl;
+		//set the callback function for any mouse event
+		setMouseCallback("Image", mouseHandler, &data);
+		waitKey(0);
+
+		// Calculate Homography between source and destination points
+		Mat h = findHomography(pts_src, data.points);
+
+		// Warp source image
+		warpPerspective(im_first, im_temp, h, im_temp.size());
+
+		// Extract four points from mouse data
+		Point pts_dst[4];
+		for (int i = 0; i < 4; i++)
+		{
+			pts_dst[i] = data.points[i];
+		}
+
+		// Black out polygonal area in destination image.
+		fillConvexPoly(im_scene, pts_dst, 4, Scalar(0), CV_AA);
+
+		im_scene = im_scene + im_temp;
+
+		// Display image.
+		imshow("Image", im_scene);
+		waitKey(0);
+	
+	}
+
+
+
+
+
+}
+
+
+void mouseHandler(int event, int x, int y, int flags, void* data_ptr)
+{
+	if (event == EVENT_LBUTTONDOWN)
+	{
+		userdata *data = ((userdata *)data_ptr);
+		circle(data->im, Point(x, y), 3, Scalar(0, 255, 255), 5, CV_AA);
+		imshow("Image", data->im);
+		if (data->points.size() < 4)
+		{
+			data->points.push_back(Point2f(x, y));
+		}
+	}
 
 }
 
