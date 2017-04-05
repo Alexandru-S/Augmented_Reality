@@ -7,8 +7,8 @@ void advStitch();
 Stitcher::Mode mode = Stitcher::PANORAMA;
 vector<Mat> imgs;
 
-Mat fgMaskMOG233; 
-Ptr<BackgroundSubtractor> pMOG222;
+Mat matMogMask; 
+Ptr<BackgroundSubtractor> ptrMog;
 
 
 //https://ramsrigoutham.com/2012/11/22/panorama-image-stitching-in-opencv/
@@ -18,21 +18,24 @@ int Img()
 
 	Mat image1;
 	Mat image2;
+	Mat image12;
 	int inp2;
 
 	Mat grayimage1;
 	Mat grayimage2;
-	printf("please specify which stitching you are using:\n 1: normal stitching \n 2: advanced stitching \n");
+
+	ptrMog = createBackgroundSubtractorMOG2();
+
+	printf("please specify which stitching you are using:\n 1: normal stitching \n 2: advanced stitching \n 3: background subtraction \n");
 	cin >> inp2;
 	cout << inp2 << endl;
 
+	image1 = imread("pic1.jpg", CV_LOAD_IMAGE_COLOR);   // Read the file
+	image2 = imread("pic2.jpg", CV_LOAD_IMAGE_COLOR);   // Read the file
+	image12 = imread("img12.jpg", CV_LOAD_IMAGE_COLOR);
+
 	if (inp2 == 1) {
 
-
-		image1 = imread("pic1.jpg", CV_LOAD_IMAGE_COLOR);   // Read the file
-		image2 = imread("pic2.jpg", CV_LOAD_IMAGE_COLOR);   // Read the file
-
-		//pMOG222->apply(image1, fgMaskMOG233);
 		if (!image1.data || !image2.data)                              // Check for invalid input
 		{
 			cout << "Could not open or find the image" << std::endl;
@@ -122,16 +125,39 @@ int Img()
 		Window(img_keypoints_1, "key img 1");
 		waitKey(0);
 	}
-	else if (inp2 = 2)
+	if (inp2 == 2)
 	{
 
-
-	
 
 		printf("advanced stitching");
 		advStitch();
 		return 0;
 	}
+	else if (inp2 == 3)
+	{
+
+		if (!image1.data || !image2.data)                              // Check for invalid input
+		{
+			cout << "Could not open or find the image" << std::endl;
+			return -1;
+		}
+		error(image1);
+
+	
+
+		ptrMog->apply(image1, matMogMask);
+
+		rectangle(image12, cv::Point(10, 2), cv::Point(100, 20),
+			cv::Scalar(255, 255, 255), -1);
+
+
+		imshow("FG Mask MOG 2", matMogMask);
+		//imshow("FG Mask MOG qf", image1);
+		imshow("image 12", image12);
+		waitKey(0);
+	}
+
+
 
 }
 
