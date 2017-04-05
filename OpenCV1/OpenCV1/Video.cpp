@@ -6,42 +6,137 @@ Ptr<BackgroundSubtractor> ptrMog2; //MOG2 Background subtractor
 char keyboard; //input from keyboard
 
 Mat frame;
+Mat currVid, prevVid;
 
+
+int invid;
 int Video()
 {
 	ptrMog2 = createBackgroundSubtractorMOG2();
 
 	string filename = "video1.mp4";
+	string filename2 = "video2.mp4";
+
 	VideoCapture capture(filename);
-	if (!capture.isOpened()) {
-		//error in opening the video input
-		cerr << "Unable to open video file: " << filename << endl;
-		exit(EXIT_FAILURE);
-	}
-	//read input data. ESC or 'q' for quitting
-	while ((char)keyboard != 'q' && (char)keyboard != 27) {
-		//read the current frame
-		if (!capture.read(frame)) {
-			cerr << "Unable to read next frame." << endl;
-			cerr << "Exiting..." << endl;
+	VideoCapture capture2(filename2);
+
+	printf("please select from the following:\n 1 for video \n 2 for background subtraction\n 3 for panorama \n");
+	cin >> invid;
+
+	if (invid == 1)
+	{
+
+		if (!capture.isOpened()) {
+			//error in opening the video input
+			cerr << "Unable to open video file: " << filename << endl;
 			exit(EXIT_FAILURE);
 		}
-		//update the background model
-		ptrMog2->apply(frame, matVideoMask);
-		//get the frame number and write it on the current frame
-		stringstream ss;
-		rectangle(frame, cv::Point(10, 2), cv::Point(100, 20),
-			cv::Scalar(255, 255, 255), -1);
-		ss << capture.get(CAP_PROP_POS_FRAMES);
-		string frameNumberString = ss.str();
-		putText(frame, frameNumberString.c_str(), cv::Point(15, 15),
-			FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
-		//show the current frame and the fg masks
-		imshow("Frame", frame);
-		imshow("FG Mask MOG 2", matVideoMask);
-		//get the input from the keyboard
-		keyboard = waitKey(30);
+		//read input data. ESC or 'q' for quitting
+		while ((char)keyboard != 'q' && (char)keyboard != 27) {
+
+			if (!capture.read(frame)) {
+				cerr << "Unable to read next frame." << endl;
+				cerr << "Exiting..." << endl;
+				exit(EXIT_FAILURE);
+			}
+
+			printf("no of frames", frame.size());
+
+			ptrMog2->apply(frame, matVideoMask);
+
+			stringstream ss;
+			rectangle(frame, cv::Point(10, 2), cv::Point(100, 20),
+				cv::Scalar(255, 255, 255), -1);
+			ss << capture.get(CAP_PROP_POS_FRAMES);
+			string frameNumberString = ss.str();
+			putText(frame, frameNumberString.c_str(), cv::Point(15, 15),
+				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
+
+			imshow("Frame", frame);
+			//imshow("FG Mask MOG 2", matVideoMask);
+
+			keyboard = waitKey(30);
+		}
+
+
 	}
-	//delete capture object
+	if (invid == 2)
+	{
+
+		if (!capture.isOpened()) {
+			//error in opening the video input
+			cerr << "Unable to open video file: " << filename << endl;
+			exit(EXIT_FAILURE);
+		}
+		//read input data. ESC or 'q' for quitting
+		while ((char)keyboard != 'q' && (char)keyboard != 27) {
+
+			if (!capture.read(frame)) {
+				cerr << "Unable to read next frame." << endl;
+				cerr << "Exiting..." << endl;
+				exit(EXIT_FAILURE);
+			}
+
+			printf("no of frames", frame.size());
+
+			ptrMog2->apply(frame, matVideoMask);
+
+			stringstream ss;
+			rectangle(frame, cv::Point(10, 2), cv::Point(100, 20),
+				cv::Scalar(255, 255, 255), -1);
+			ss << capture.get(CAP_PROP_POS_FRAMES);
+			string frameNumberString = ss.str();
+			putText(frame, frameNumberString.c_str(), cv::Point(15, 15),
+				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
+
+			imshow("Frame", frame);
+			imshow("FG Mask MOG 2", matVideoMask);
+
+			keyboard = waitKey(30);
+		}
+	
+	
+	
+	
+	
+	}
+
+
+	if (invid == 3)
+	{
+		if (!capture2.isOpened()) {
+			cerr << "Unable to open video file: " << filename << endl;
+			exit(EXIT_FAILURE);
+		}
+		while ((char)keyboard != 'q' && (char)keyboard != 27) {
+
+			if (!capture2.read(frame)) {
+				cerr << "Unable to read next frame." << endl;
+				cerr << "Exiting..." << endl;
+				exit(EXIT_FAILURE);
+			}
+			capture2.set(CV_CAP_PROP_FRAME_WIDTH, 600);
+			capture2.set(CV_CAP_PROP_FRAME_HEIGHT, 320);
+			Mat image;
+			capture2.read(image);
+			resize(image, image, Size(600, 320), 0, 0, INTER_CUBIC);
+
+
+
+
+
+			stringstream ss;
+			rectangle(image, cv::Point(10, 2), cv::Point(100, 20),
+				cv::Scalar(255, 255, 255), -1);
+			ss << capture2.get(CAP_PROP_POS_FRAMES);
+			string frameNumberString = ss.str();
+			putText(image, frameNumberString.c_str(), cv::Point(15, 15),
+				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
+			
+			imshow("firstframe", image);
+			imshow("firstframe2", image);
+			keyboard = waitKey(30);
+		}
+	}
 	capture.release();
 }

@@ -35,9 +35,19 @@ int Webcam()
 
 	if (inpWebCam == 2)
 	{
-		cout << "Input Camera device number(ex: 0 enter) \n";
-
-
+		VideoCapture cap(0);
+		Mat curr, prev;
+		//if (!cap.)return -1;
+		cap >> curr;
+		curr.copyTo(prev);
+		while (1)
+		{
+			cap >> curr;
+			imwrite("current.png", curr);
+			imwrite("previous.png", prev);
+			curr.copyTo(prev);
+			if (waitKey(5) == 27)break; //Esc pressed
+		}
 	}
 
 	return 0;
