@@ -43,9 +43,7 @@ int Img()
 	image2 = imread("pic2.jpg", CV_LOAD_IMAGE_COLOR);   
 	image12 = imread("img12.jpg", CV_LOAD_IMAGE_COLOR);
 
-	Mat im_first = imread("first-image.jpg");
-	Mat im_scene = imread("times-square.jpg");
-	Size size = im_first.size();
+	
 
 
 
@@ -146,8 +144,26 @@ int Img()
 
 
 		printf("advanced stitching");
+		Mat image112 = imread("img12.jpg", CV_LOAD_IMAGE_COLOR);
+		if (!image112.data) {
+			//error in opening the first image
+			cerr << "Unable to open first image frame: "<< endl;
+			exit(EXIT_FAILURE);
+		}
+
+		Mat fgMaskMOG1112;
+		Ptr<BackgroundSubtractor> pMOG1112;
+		
+		pMOG1112 = createBackgroundSubtractorMOG2(); //MOG2 approach
+		pMOG1112->apply(image112, fgMaskMOG1112);
+		imshow("image here", fgMaskMOG1112);
+
+		
+
+		waitKey(0);
+
 		advStitch();
-		return 0;
+
 	}
 	if (inp2 == 3)
 	{
@@ -172,8 +188,53 @@ int Img()
 		imshow("image 12", image12);
 		waitKey(0);
 	}
+	if (inp2 == 5)
+	{
+		//Mat b = imread("castle.jpg");
+		//Mat b = imread("square.jpg");
+		//Mat bSubmat = b.submat(a.rows(), a.rows() * 2, a.cols(), a.cols() * 2);
+		//a.copyTo(bSubmat);
+		//imshow("qefqe	f", b test )
+
+	}
+
+
+
 	else if (inp2 == 4)
 	{
+
+		vector< Mat > vImg1;
+		Mat rImg1;
+
+		vImg1.push_back(imread("img11.jpg"));
+		vImg1.push_back(imread("img12.jpg"));
+		vImg1.push_back(imread("img13.jpg"));
+		vImg1.push_back(imread("img14.jpg"));
+
+
+		Stitcher stitcher1 = Stitcher::createDefault();
+
+
+		unsigned long AAtime = 0, BBtime = 0;
+		AAtime = getTickCount();
+
+		Stitcher::Status status = stitcher1.stitch(vImg1, rImg1);
+
+		BBtime = getTickCount(); //check processing time 
+		printf("%.2lf sec \n", (BBtime - AAtime) / getTickFrequency()); //check processing time
+
+		if (Stitcher::OK == status)
+			imshow("Stitching Result", rImg1);
+		else
+			printf("Stitching fail.");
+
+		imshow("Stitching Result", rImg1);
+
+		Mat im_first = imread("smiley.png");
+
+		Mat im_scene = rImg1;
+		Size size = im_first.size();
+
 		vector<Point2f> pts_src;
 		pts_src.push_back(Point2f(0, 0));
 		pts_src.push_back(Point2f(size.width - 1, 0));
