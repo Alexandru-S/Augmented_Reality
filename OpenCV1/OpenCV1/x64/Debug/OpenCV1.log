@@ -1,8 +1,9 @@
 ﻿  Video.cpp
-c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(43): warning C4474: 'printf' : too many arguments passed for format string
-  c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(43): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
-c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(80): warning C4474: 'printf' : too many arguments passed for format string
-  c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(80): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
-c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(142): warning C4715: 'Video': not all control paths return a value
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(117): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(47): warning C4474: 'printf' : too many arguments passed for format string
+  c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(47): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(84): warning C4474: 'printf' : too many arguments passed for format string
+  c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(84): note: placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+c:\users\owner\desktop\augmented_reality\opencv1\opencv1\video.cpp(179): warning C4715: 'Video': not all control paths return a value
   OpenCV1.vcxproj -> C:\Users\owner\Desktop\Augmented_Reality\OpenCV1\x64\Debug\OpenCV1.exe
   OpenCV1.vcxproj -> C:\Users\owner\Desktop\Augmented_Reality\OpenCV1\x64\Debug\OpenCV1.pdb (Full PDB)

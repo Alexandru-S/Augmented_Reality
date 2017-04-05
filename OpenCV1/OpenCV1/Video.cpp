@@ -8,6 +8,10 @@ char keyboard; //input from keyboard
 Mat frame;
 Mat currVid, prevVid;
 
+Mat grayimage1;
+Mat grayimage2;
+
+
 
 int invid;
 int Video()
@@ -101,13 +105,39 @@ int Video()
 	
 	}
 
-
+	
 	if (invid == 3)
 	{
+		
+	
+	}
+
+	if (invid == 4)
+	{
+		int frameCnt = capture2.get(CV_CAP_PROP_FRAME_COUNT);
+		cout << frameCnt << endl;
+
 		if (!capture2.isOpened()) {
 			cerr << "Unable to open video file: " << filename << endl;
 			exit(EXIT_FAILURE);
 		}
+
+		Mat prev;
+		Mat result;
+		Mat curr;
+
+		int count3=0;
+		Mat image;
+
+		capture2 >> curr;
+		curr.copyTo(prev);
+
+		//imshow("1", curr);
+		//imshow("2", prev);
+
+		capture2.set(CV_CAP_PROP_FRAME_WIDTH, 600);
+		capture2.set(CV_CAP_PROP_FRAME_HEIGHT, 320);
+
 		while ((char)keyboard != 'q' && (char)keyboard != 27) {
 
 			if (!capture2.read(frame)) {
@@ -115,16 +145,10 @@ int Video()
 				cerr << "Exiting..." << endl;
 				exit(EXIT_FAILURE);
 			}
-			capture2.set(CV_CAP_PROP_FRAME_WIDTH, 600);
-			capture2.set(CV_CAP_PROP_FRAME_HEIGHT, 320);
-			Mat image;
+			
 			capture2.read(image);
-			resize(image, image, Size(600, 320), 0, 0, INTER_CUBIC);
-
-
-
-
-
+		
+			
 			stringstream ss;
 			rectangle(image, cv::Point(10, 2), cv::Point(100, 20),
 				cv::Scalar(255, 255, 255), -1);
@@ -132,11 +156,20 @@ int Video()
 			string frameNumberString = ss.str();
 			putText(image, frameNumberString.c_str(), cv::Point(15, 15),
 				FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
+
+
+			resize(image, image, Size(600, 320), 0, 0, INTER_CUBIC);
+			imshow("image", image);
+			resize(prev, prev, Size(600, 320), 0, 0, INTER_CUBIC);
+			imshow("prev", prev);
 			
-			imshow("firstframe", image);
-			imshow("firstframe2", image);
+
+
+
+			image.copyTo(prev);
 			keyboard = waitKey(30);
 		}
 	}
+
 	capture.release();
 }
