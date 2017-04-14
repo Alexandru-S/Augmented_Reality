@@ -9,7 +9,7 @@ import cv2
 from matplotlib import pyplot as plt
 from matplotlib import image as mpimg
 
-
+firstbool = True
 
 cap = cv2.VideoCapture(0)
 imgL = cv2.imread('im1.jpg', 0)
@@ -18,7 +18,8 @@ plt.imshow(imgL,'Blues')
 face_cascade = cv2.CascadeClassifier('/usr/local/Cellar/opencv3/3.2.0/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml')
 eye_cascade = cv2.CascadeClassifier('/usr/local/Cellar/opencv3/3.2.0/share/OpenCV/haarcascades/haarcascade_eye.xml')
 
-firstbool = True
+
+fgbg = cv2.createBackgroundSubtractorMOG2()
 
 while(firstbool):
     # Capture frame-by-frame
@@ -37,6 +38,8 @@ while(firstbool):
         cv2.destroyAllWindows()
         break
     else:
+        #face detection code taken from the opencv3 docs
+        #http://docs.opencv.org/3.1.0/d7/d8b/tutorial_py_face_detection.html
         for (x,y,w,h) in faces:
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
             roi_gray = gray[y:y+h, x:x+w]
@@ -44,10 +47,15 @@ while(firstbool):
             eyes = eye_cascade.detectMultiScale(roi_gray)
             for (ex,ey,ew,eh) in eyes:
                 cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
-        cv2.imshow('gray',gray)
-        
-        cv2.imshow('frame', frame)
 
+
+#cv2.imshow('gray',gray)
+        fgmask = fgbg.apply(frame)
+#cv2.imshow('frame',fgmask)
+        res = cv2.bitwise_and(frame,frame,mask = fgmask)
+        cv2.imshow('frame',res)
+
+#cv2.imshow('frame', frame)
 
 
 stereo = cv2.StereoBM_create(numDisparities=16, blockSize=15)
