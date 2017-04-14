@@ -8,13 +8,15 @@ import time
 import cv2
 from matplotlib import pyplot as plt
 from matplotlib import image as mpimg
-from pyimagesearch import panorama as Stitcher
+
 
 
 cap = cv2.VideoCapture(0)
 imgL = cv2.imread('im1.jpg', 0)
 imgR = cv2.imread('im2.jpg', 0)
 plt.imshow(imgL,'Blues')
+face_cascade = cv2.CascadeClassifier('/usr/local/Cellar/opencv3/3.2.0/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier('/usr/local/Cellar/opencv3/3.2.0/share/OpenCV/haarcascades/haarcascade_eye.xml')
 
 firstbool = True
 
@@ -24,7 +26,9 @@ while(firstbool):
     
     # Our operations on the frame come here
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
     #color = cv2.cvtColor(frame, )
+    
     
     if cv2.waitKey(33) == ord('q'):
         print ('pressed Q')
@@ -33,6 +37,15 @@ while(firstbool):
         cv2.destroyAllWindows()
         break
     else:
+        for (x,y,w,h) in faces:
+            cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
+            roi_gray = gray[y:y+h, x:x+w]
+            roi_color = frame[y:y+h, x:x+w]
+            eyes = eye_cascade.detectMultiScale(roi_gray)
+            for (ex,ey,ew,eh) in eyes:
+                cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
+        cv2.imshow('gray',gray)
+        
         cv2.imshow('frame', frame)
 
 
