@@ -4,17 +4,25 @@ import numpy as np
 import argparse
 import datetime
 import imutils
+import utils
+import math
 import time
 import cv2
+import os
 import sys
 from matplotlib import pyplot as plt
 from matplotlib import image as mpimg
+#from matchers import matchers
 
 firstbool = True
 
 cap = cv2.VideoCapture(0)
 imgL = cv2.imread('im1.jpg', 0)
 imgR = cv2.imread('im2.jpg', 0)
+
+Fimg = cv2.imread('img2.jpg', 0)
+Simg = cv2.imread('img1.jpg', 0)
+
 videotest = cv2.VideoCapture('video2.mp4')
 
 plt.imshow(imgL,'Blues')
@@ -23,26 +31,21 @@ eye_cascade = cv2.CascadeClassifier('/usr/local/Cellar/opencv3/3.2.0/share/OpenC
 
 fgbg = cv2.createBackgroundSubtractorMOG2()
 
-choice = input("Press \n1 for face detection with background subtraction\n2 for panorama stitching\n")
-print( "you entered", choice)
+choise = input("Press \n1 for face detection with background subtraction\n2 for panorama stitching\n3 for picture stitching \n4 for other picture stitching \n")
+print( "you entered", choise)
 
 
-
-
-while(firstbool):
-    # Capture frame-by-frame
-
-
-
-    
-    if cv2.waitKey(33) == ord('q'):
-        print ('pressed Q')
-        firstbool = False
-        cap.release()
-        cv2.destroyAllWindows()
-        break
-    else:
-        if choice is '1':
+if choise is '1':
+    while(firstbool):
+        # Capture frame-by-frame
+        if cv2.waitKey(33) == ord('q'):
+            print ('pressed Q')
+            firstbool = False
+            cap.release()
+            cv2.destroyAllWindows()
+            break
+        else:
+        
             ret, frame = cap.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = face_cascade.detectMultiScale(gray, 1.3, 5)
@@ -57,21 +60,23 @@ while(firstbool):
                 eyes = eye_cascade.detectMultiScale(roi_gray)
                 for (ex,ey,ew,eh) in eyes:
                     cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
-        
-      
-#cv2.imshow('gray',gray)
 
             fgmask = fgbg.apply(frame)
             notnot = cv2.bitwise_not(fgmask)
 
-
-#cv2.imshow('frame',fgmask)
             res = cv2.bitwise_and(frame,frame,mask = fgmask)
             cv2.imshow('frame', res)
 
-        elif choice is '2':
-            retStitch, frameStitch = videotest.read()
-            cv2.imshow('frame', frameStitch)
+elif choise is '2':
+    retStitch, frameStitch = videotest.read()
+    cv2.imshow('frame', frameStitch)
+
+
+elif choise is '3':
+    print( "option 3" )
+
+elif choise is '4':
+    print("option 4")
 
 
 
