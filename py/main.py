@@ -17,6 +17,7 @@ from matplotlib import image as mpimg
 firstbool = True
 
 cap = cv2.VideoCapture(0)
+
 imgL = cv2.imread('im1.jpg', 0)
 imgR = cv2.imread('im2.jpg', 0)
 
@@ -36,47 +37,81 @@ print( "you entered", choise)
 
 
 if choise is '1':
-    while(firstbool):
-        # Capture frame-by-frame
-        if cv2.waitKey(33) == ord('q'):
-            print ('pressed Q')
-            firstbool = False
-            cap.release()
-            cv2.destroyAllWindows()
-            break
-        else:
-        
-            ret, frame = cap.read()
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-        
-        
-            #face detection code taken from the opencv3 docs using haar cascades
-            #http://docs.opencv.org/3.1.0/d7/d8b/tutorial_py_face_detection.html
-            for (x,y,w,h) in faces:
-                cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
-                roi_gray = gray[y:y+h, x:x+w]
-                roi_color = frame[y:y+h, x:x+w]
-                eyes = eye_cascade.detectMultiScale(roi_gray)
-                for (ex,ey,ew,eh) in eyes:
-                    cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
+	while(firstbool):
+		# Capture frame-by-frame
+		if cv2.waitKey(33) == ord('q'):
+			print ('pressed Q')
+			firstbool = False
+			cap.release()
+			cv2.destroyAllWindows()
+			break
+		else:
 
-            fgmask = fgbg.apply(frame)
-            notnot = cv2.bitwise_not(fgmask)
+			ret, frame = cap.read()
+			#gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+			#faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-            res = cv2.bitwise_and(frame,frame,mask = fgmask)
-            cv2.imshow('frame', res)
+
+			#face detection code taken from the opencv3 docs using haar cascades
+			#http://docs.opencv.org/3.1.0/d7/d8b/tutorial_py_face_detection.html
+			#for (x,y,w,h) in faces:
+			#	cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
+			#	roi_gray = gray[y:y+h, x:x+w]
+			#	roi_color = frame[y:y+h, x:x+w]
+			#	eyes = eye_cascade.detectMultiScale(roi_gray)
+			#	for (ex,ey,ew,eh) in eyes:
+			#		cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
+
+			#fgmask = fgbg.apply(frame)
+			#notnot = cv2.bitwise_not(fgmask)
+
+			#res = cv2.bitwise_and(frame,frame,mask = fgmask)
+			cv2.imshow('frame', frame)
 
 elif choise is '2':
-    retStitch, frameStitch = videotest.read()
-    cv2.imshow('frame', frameStitch)
+	print( "option 2" )
+	cv2.imshow("frame", imgL)
+	cv2.waitKey(0)
+	cv2.destroyAllWindows()
+
+	
 
 
 elif choise is '3':
-    print( "option 3" )
+	print( "option 3" )
+	count = 0
+	seconds = 2
+	cap = cv2.VideoCapture('video2.mp4')
+	fps = cap.get(cv2.CAP_PROP_FPS) 
+	multiplier = fps * seconds
+	prev =0
+	while(cap.isOpened()):
+		
+		frameId = int(round(cap.get(1)))
+		ret, frame = cap.read()
+		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+		if frameId % multiplier == 0:
+			cv2.imshow('frame3', prev)
+			cv2.imshow('frame',frame)
+			time.sleep(.001)
+			prev=frame
+
+		
+
+
+
+		count = count + 1
+		if cv2.waitKey(1) & 0xFF == ord('q'):
+			break
+
+	cap.release()
+	cv2.destroyAllWindows()
+	print('complete')
+
 
 elif choise is '4':
-    print("option 4")
+	print("option 4")
 
 
 
