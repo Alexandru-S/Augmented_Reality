@@ -30,8 +30,8 @@ videotest = cv2.VideoCapture('video2.mp4')
 
 plt.imshow(imgL, 'Blues')
 face_cascade = cv2.CascadeClassifier(
-    '/usr/local/Cellar/opencv3/3.2.0/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml')
-eye_cascade = cv2.CascadeClassifier('/usr/local/Cellar/opencv3/3.2.0/share/OpenCV/haarcascades/haarcascade_eye.xml')
+    'haarcascades/haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_eye.xml')
 
 fgbg = cv2.createBackgroundSubtractorMOG2()
 

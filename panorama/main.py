@@ -1,5 +1,10 @@
 from pyimagesearch.panorama import Stitcher
+#from kivy.app import App
+#from kivy.uix.button import Button
 import numpy as np
+from numpy import pi,sin,cos,mgrid
+#from mayavi import mlab
+#import vtk
 import argparse
 import imutils
 import cv2
@@ -13,13 +18,17 @@ ap = argparse.ArgumentParser()
 choice =0
 
 print('please choose from the options')
-choice = input('1 : basic image stitching\n2 : basic panorama stitching \n\n')
+choice = input('1 : basic image stitching\n2 : basic panorama video stitching\n3 : basic panorama stitching from phone camera \n\n')
 
 if choice is '1':
+
+    #http://www.pyimagesearch.com/2016/01/11/opencv-panorama-stitching/
+    #stitching pipeline code taken from above but modified to work with sift instead
+    #of brute force and a few other things
     print('option 1 selected')
 
-    imageA = cv2.imread('images/bryce_left_01.png')
-    imageB = cv2.imread('images/bryce_right_01.png')
+    imageA = cv2.imread('p1.jpg')
+    imageB = cv2.imread('p2.jpg')
     imageA = cv2.resize(imageA, (0, 0), fx=0.5, fy=0.5)
     imageB = cv2.resize(imageB, (0, 0), fx=0.5, fy=0.5)
 
@@ -30,6 +39,9 @@ if choice is '1':
     cv2.imshow("Result", result)
 
 if choice is '2':
+    # http://www.pyimagesearch.com/2016/01/11/opencv-panorama-stitching/
+    # stitching pipeline code taken from above but modified to work with sift instead
+    # of brute force and a few other things
     count = 1
     seconds = 5
     prev= 0
@@ -42,11 +54,6 @@ if choice is '2':
 
     print('option 2 selected')
     cap = cv2.VideoCapture('video2.mp4', 0)
-
-    imageA = cv2.imread('images/bryce_left_01.png')
-    imageB = cv2.imread('images/bryce_right_01.png')
-    imageA = cv2.resize(imageA, (0, 0), fx=0.5, fy=0.5)
-    imageB = cv2.resize(imageB, (0, 0), fx=0.5, fy=0.5)
 
 
     while (cap.isOpened()):
@@ -82,4 +89,60 @@ if choice is '2':
     cap.release()
     cv2.destroyAllWindows()
     print('complete')
+
+if choice is '3':
+
+    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
+
+
+    print(str(face_cascade))
+    print('choice 3\n')
+
+
+    img = cv2.imread('it1.jpg')
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    # face detection code taken from the opencv3 docs using haar cascades
+    # http://docs.opencv.org/3.1.0/d7/d8b/tutorial_py_face_detection.html
+    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+    for (x, y, w, h) in faces:
+        cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        roi_gray = gray[y:y + h, x:x + w]
+        roi_color = img[y:y + h, x:x + w]
+        eyes = eye_cascade.detectMultiScale(roi_gray)
+        for (ex, ey, ew, eh) in eyes:
+            cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
+
+
+    img1 = cv2.imread('it2.jpg')
+    gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
+    # face detection code taken from the opencv3 docs using haar cascades
+    # http://docs.opencv.org/3.1.0/d7/d8b/tutorial_py_face_detection.html
+    faces1 = face_cascade.detectMultiScale(gray1, 1.3, 5)
+    for (x, y, w, h) in faces1:
+        cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        roi_gray1 = gray1[y:y + h, x:x + w]
+        roi_color1 = img1[y:y + h, x:x + w]
+        eyes1 = eye_cascade.detectMultiScale(roi_gray1)
+        for (ex, ey, ew, eh) in eyes1:
+            cv2.rectangle(roi_color1, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
+
+    imageA = cv2.resize(img, (0, 0), fx=0.5, fy=0.5)
+    imageB = cv2.resize(img1, (0, 0), fx=0.5, fy=0.5)
+    cv2.imshow('imgA', img)
+    cv2.imshow('imgB', img1)
+
+    stitcher = Stitcher()
+    (result, vis) = stitcher.stitch([img1, img], showMatches=True)
+
+    cv2.imshow("Keypoint Matches", vis)
+    cv2.imshow("Result", result)
+
+    cv2.waitKey(0)
+
+
+  
+
+
+
 cv2.waitKey(0)
