@@ -19,23 +19,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../panorama-stitching/main.py">
+        <entry file="file://$PROJECT_DIR$/../panorama/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="308">
+              <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="panorama.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../panorama-stitching/pyimagesearch/panorama.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -59,8 +49,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="854" />
-    <option name="y" value="24" />
+    <option name="x" value="740" />
+    <option name="y" value="156" />
     <option name="width" value="1063" />
     <option name="height" value="905" />
   </component>
@@ -229,8 +219,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="854" y="24" width="1063" height="905" extended-state="0" />
-    <editor active="true" />
+    <frame x="740" y="156" width="1063" height="905" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -267,7 +256,7 @@
         <state relative-caret-position="3366">
           <caret line="187" column="20" lean-forward="false" selection-start-line="187" selection-start-column="20" selection-end-line="187" selection-end-column="20" />
           <folding>
-            <element signature="e#33#51#0" expanded="true" />
+            <element signature="e#33#51#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -277,7 +266,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#33#51#0" expanded="true" />
+            <element signature="e#33#51#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -287,7 +276,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#33#51#0" expanded="true" />
+            <element signature="e#33#51#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -319,8 +308,16 @@
         <state relative-caret-position="-2180">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="18" />
           <folding>
-            <element signature="e#33#51#0" expanded="true" />
+            <element signature="e#33#51#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../panorama-stitching/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -332,10 +329,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../panorama-stitching/main.py">
+    <entry file="file://$PROJECT_DIR$/../panorama/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="308">
+          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
