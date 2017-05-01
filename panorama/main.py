@@ -27,8 +27,8 @@ if choice is '1':
     #of brute force and a few other things
     print('option 1 selected')
 
-    imageA = cv2.imread('p1.jpg')
-    imageB = cv2.imread('p2.jpg')
+    imageA = cv2.imread('icr.jpg')
+    imageB = cv2.imread('icl.jpg')
     imageA = cv2.resize(imageA, (0, 0), fx=0.5, fy=0.5)
     imageB = cv2.resize(imageB, (0, 0), fx=0.5, fy=0.5)
 
@@ -100,7 +100,7 @@ if choice is '3':
     print('choice 3\n')
 
 
-    img = cv2.imread('it1.jpg')
+    img = cv2.imread('izr.jpg')
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     # face detection code taken from the opencv3 docs using haar cascades
     # http://docs.opencv.org/3.1.0/d7/d8b/tutorial_py_face_detection.html
@@ -114,7 +114,7 @@ if choice is '3':
             cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
 
 
-    img1 = cv2.imread('it2.jpg')
+    img1 = cv2.imread('izl.jpg')
     gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
     # face detection code taken from the opencv3 docs using haar cascades
     # http://docs.opencv.org/3.1.0/d7/d8b/tutorial_py_face_detection.html
